@@ -128,7 +128,7 @@ scheduled messages.
 ---
 
 
-**AI Message Generator Modal  -** A modal that accepts prompts from users and displays AIgenerated responses using e Google Generative AI API, integrated directly into the chat.
+**AI Message Generator Modal  -** A modal that accepts prompts from users and displays AIgenerated responses using Google Generative AI API, integrated directly into the chat.
 ![AI Message Generator Modal](assets/ProjectImage-14.png)
 
 ---
