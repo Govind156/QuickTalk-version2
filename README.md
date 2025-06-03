@@ -1,3 +1,7 @@
 # QuickTalk - Real-time Chat App
 
-![SignUp Page](https://github.com/user-attachments/assets/ba57d217-c05a-4d50-a0f7-e052680a7dd8)
+![SignUp Page](assets/ProjectImage-1)
+![Send Email Page](assets/ProjectImage-2.1)
+![Verify Email Page](assets/ProjectImage-2)
+![Welcome Email Page](assets/ProjectImage-2.2)
+![Login Page](assets/ProjectImage-3)
