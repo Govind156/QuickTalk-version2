@@ -56,7 +56,7 @@ router.post('/signup',async(req,res)=>{
         
 
         //3.if not first bcrypt the password
-        const hashedpassword=await bcryptjs.hash(req.body.password,15)
+        const hashedpassword=await bcryptjs.hash(req.body.password,12)
         req.body.password=hashedpassword
         const verificationcode=Math.floor(100000+Math.random() *900000).toString()
 
