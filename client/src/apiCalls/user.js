@@ -32,7 +32,6 @@ export const updateUserThemePreference = async (userId, theme) => {
     try {
         const response = await axiosInstance.put(url+'api/user/theme',{userId,theme})
         return response.data
-        return data;
     } catch (error) {
         throw error;
     }
