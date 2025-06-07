@@ -21,8 +21,7 @@ function Searchlist({searchkey,setSearchKey,socket}){
         setOnlineUsers(users || []);
       });
 
-      // Request current online users
-    //   socket.emit('get-online-users');
+    
     }
 
     return () => {
@@ -81,10 +80,7 @@ function Searchlist({searchkey,setSearchKey,socket}){
  const Isselectedchat=(user)=>{
     if (!user?._id || !selectedchat?.members) return false;
     return selectedchat.members.some(m => m?._id === user._id);
-    // if(selectedchat && user._id){
-    //    return selectedchat?.members?.map(m=>m?._id).includes(user._id);
-    // }
-    //  return false;
+   
  }
 
  const getlastMessage=(userId)=>{
@@ -94,7 +90,6 @@ function Searchlist({searchkey,setSearchKey,socket}){
     }
     else{
        const msgprefix=chat?.lastMessage?.sender === currentuser?._id ? "You : " : "" 
-    //    return msgprefix+chat?.lastMessage?.text.substring(0,25)
        return msgprefix + (chat?.lastMessage?.text ? chat.lastMessage.text.substring(0,25) : "")
     }
 
@@ -138,22 +133,7 @@ function Searchlist({searchkey,setSearchKey,socket}){
         })
     }
  }
-// function getdata() {
-//     if(searchkey === "") {
-//         return Allchats.filter(chat => {
-//             // Filter out chats with deleted users
-//             return chat.members.every(member => !member?.deleted);
-//         });
-//     } else {
-//         return Alluser.filter((eachuser) => {
-//             // Exclude deleted users from search
-//             return !eachuser?.deleted && (
-//                 eachuser?.firstName?.toLowerCase().includes(searchkey.toLowerCase()) ||
-//                 eachuser?.LastName?.toLowerCase().includes(searchkey.toLowerCase())
-//             );
-//         });
-//     }
-// }
+
 
  useEffect(()=>{
     if (!socket) return;

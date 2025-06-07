@@ -21,7 +21,6 @@ import { Tooltip } from '@chakra-ui/react'
 
 function Chatarea({socket}){
     const {currentChatUser,selectedchat,user,Allchats,scheduledMessages,chatDrafts}=useSelector(state=>state.userReducer)
-    // const selecteduser=selectedchat?.members?.find(u=>u?._id !== user._id)
     const selecteduser = selectedchat?.members?.find(u => {
       if (!u || !user) return false;
       return u._id !== user._id;
@@ -69,34 +68,6 @@ function Chatarea({socket}){
           text: message,
           image: image,
         };
-        //use when handle schedule message from client side
-        // if (scheduledFor) {
-        //   NewMessage.scheduledFor = scheduledFor;
-        //   NewMessage.scheduled = true;
-        //   NewMessage.sent = false;
-    
-        //   // Create temporary message for optimistic UI
-        //   const tempMessage = {
-        //     ...NewMessage,
-        //     _id: `temp-${Date.now()}`,
-        //     createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
-        //   };
-          
-        //   dispatch(addScheduledMessage(tempMessage));
-          
-        //   try {
-        //     const response = await createNewMessage(NewMessage);
-        //     if (response.success) {
-        //       // Replace temp message with real one
-        //       dispatch(removeScheduledMessage(tempMessage._id));
-        //       dispatch(addScheduledMessage(response.data));
-        //     }
-        //   } catch (error) {
-        //     // Remove temp message if API call fails
-        //     dispatch(removeScheduledMessage(tempMessage._id));
-        //     throw error;
-        //   }
-        // }
         if (scheduledFor) {
           NewMessage.scheduledFor = scheduledFor;
           NewMessage.scheduled = true;
@@ -126,122 +97,10 @@ function Chatarea({socket}){
         toast.error(error.message);
       }
     };
-    //used these function when handle schedule message logic  from client side 
-    // const checkAndSendScheduledMessages = useCallback(async () => {
-    //   try {
-    //     const state = store.getState().userReducer;
-    //     const now = new Date();
-        
-    //     const messagesToSend = state.scheduledMessages.filter(msg => 
-    //       msg?.chatId === state.selectedchat?._id &&
-    //       msg?.scheduledFor &&
-    //       new Date(msg.scheduledFor) <= now &&
-    //       msg.scheduled === true &&
-    //       msg.sent === false
-    //     );
-    
-    //     for (const msg of messagesToSend) {
-    //       try {
-    //         // Mark as sent in Redux
-    //         dispatch(updateScheduledMessage({
-    //           ...msg,
-    //           sent: true
-    //         }));
-    
-    //         // Send via socket
-    //         socket.emit('send-scheduled-message', {
-    //           ...msg,
-    //           members: state.selectedchat.members.map(m => m._id),
-    //           read: false,
-    //           createdAt: new Date().toISOString(),
-    //           scheduled: false,
-    //           sent: true
-    //         });
-    
-    //         //Update server status
-    //         if (msg._id && typeof msg._id === 'string' && !msg._id.startsWith('temp-')) {
-    //           await editScheduledMessage(msg._id, {
-    //             sent: true,
-    //             scheduled: false
-    //           });
-    //         }
-    
-    //         // Remove from scheduled list after successful send
-    //         // dispatch(removeScheduledMessage(msg._id));
-            
-    //         // // Add to regular messages
-    //         // setAllMessages(prev => [...prev, {
-    //         //   ...msg,
-    //         //   scheduled: false,
-    //         //   sent: true,
-    //         //   createdAt: new Date().toISOString()
-    //         // }]);
-
-            
-    //         // Add to regular messages
-    //         setAllMessages(prev => [...prev, {
-    //           ...msg,
-    //           scheduled: false,
-    //           sent: true,
-    //           createdAt: new Date().toISOString()
-    //         }]);
-
-    //         // Remove from scheduled list
-    //         if (msg._id) {
-    //           dispatch(removeScheduledMessage(msg._id));
-    //         }
-            
-    //       } catch (error) {
-    //         console.error('Failed to send:', error);
-    //         // Revert on error
-    //         dispatch(updateScheduledMessage({
-    //           ...msg,
-    //           sent: false
-    //         }));
-    //       }
-    //     }
-    //   } catch (error) {
-    //     console.error('Scheduled check error:', error);
-    //   }
-    // }, [socket, dispatch]);
-
-    // const fetchScheduledMessages = async () => {
-    //   try {
-    //       dispatch(showLoader());
-    //       const response = await getScheduledMessages(selectedchat._id);
-    //       console.log("allscheduledmessage:",response.data)
-    //       dispatch(hideLoader());
-    //       if (response.success) {
-    //         // Filter out already sent messages
-    //         const messages = Array.isArray(response.data) ? response.data : [];
-    //         const pendingMessages = messages.filter(msg => !msg.sent);
-    //         dispatch(setScheduledMessages(pendingMessages));
-            
-    //         Check for any overdue messages
-    //         const now = new Date();
-    //         const overdueMessages = pendingMessages.filter(msg => 
-    //           msg.scheduledFor && new Date(msg.scheduledFor) <= now
-    //         );
-            
-    //         if (overdueMessages.length > 0) {
-    //           checkAndSendScheduledMessages();
-    //         }
-    //       }
-    //     }
-    //    catch (error) {
-    //       dispatch(hideLoader());
-    //       toast.error(error.message);
-    //        // Set empty array if error occurs
-    //       dispatch(setScheduledMessages([]));
-    //   }finally {
-    //     dispatch(hideLoader());
-    //   }
-    // };
    const fetchScheduledMessages = async () => {
       try {
           dispatch(showLoader());
           const response = await getScheduledMessages(selectedchat?._id);
-          console.log("allscheduledmessage:",response.data)
           dispatch(hideLoader());
           if (response.success) {
             // Filter out already sent messages
@@ -267,7 +126,6 @@ function Chatarea({socket}){
         try{
             dispatch(showLoader())
             const response=await getAllmesssage(selectedchat?._id)
-            console.log("allMessages:",response.data)
             dispatch(hideLoader())
             if(response.success){
                const regularMessages=response.data.filter(msg=>!msg.scheduled)
@@ -325,28 +183,7 @@ function Chatarea({socket}){
     const formatScheduledTime = (timestamp) => {
       return moment(timestamp).format('MMM D, hh:mm A');
     };
-    // const clearUnreadMessage=async()=>{
-    //   try{
-    //     socket.emit('clear-unread-message',{
-    //       chatId:selectedchat._id,
-    //       members:selectedchat?.members?.map(m=>m._id)          
-    //     })
-    //     const response=await clearUnreadMessageCount(selectedchat._id)
-     
 
-    //     if(response.success){
-    //        Allchats.map((eachchat)=>{
-    //          if(eachchat._id === selectedchat._id){
-    //            return response.data
-    //          }
-    //          return eachchat
-    //        })      
-    //     }
-
-    //   }catch(error){
-    //     toast.error(error.message)
-    //   }
-    // }
     const clearUnreadMessage = async () => {
       try {
         socket.emit('clear-unread-message', {
@@ -548,32 +385,13 @@ function Chatarea({socket}){
               setMessage(''); // Clear any draft
           }
       });
-        // socket.off('scheduled-message-count-cleared').on('scheduled-message-count-cleared', (data) => {
-        //   let currentSelectedChat = store.getState().userReducer.selectedchat;
-          
-        //   // Only process if it's for the current chat
-        //   if (currentSelectedChat._id === data.chatId) {
-        //     // Update read status in scheduled messages
-        //     dispatch(updateScheduledMessage({
-        //       _id: data.messageId,
-        //       read: true,
-        //       // readAt: data.readAt
-        //     }));
-      
-        //     // Also update in allMessages if the message exists there
-        //     setAllMessages(prev => prev.map(msg => 
-        //       msg._id === data.messageId ? { ...msg, read: true } : msg
-        //     ));
-        //   }
-        // });
     },[selectedchat,dispatch])
 
     
     // When selectedchat changes
     useEffect(() => {
 
-      // setMessage('');
-      // setShowEmojiPicker(false);
+     
       if (selectedchat) {
         const chatUser = selectedchat?.members.find(u => u?._id !== user?._id);
         dispatch(setCurrentChatUser(chatUser));
@@ -622,10 +440,7 @@ function Chatarea({socket}){
         //try by me when handle by server
         dispatch(updateScheduledMessage({...data,sent:true}))
 
-        //Remove from scheduled messages list if it's for the current chat
-        // if (selectedchat?._id === data.chatId) {
-        //   dispatch(removeScheduledMessage(data._id));
-        // }
+        
       };
     
       const handleNewMessage = (message) => {
@@ -795,8 +610,6 @@ function Chatarea({socket}){
                   }}
                   onSend={(aiMessage) => {
                     setMessage(aiMessage); // Populate input with AI message
-                    // Optionally auto-focus the input after:
-                    // document.querySelector('.send-message-input')?.focus();
                   }}
                 />
 

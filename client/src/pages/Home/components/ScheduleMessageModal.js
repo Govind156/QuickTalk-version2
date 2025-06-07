@@ -25,73 +25,7 @@ const ScheduleMessageModal = ({ isOpen, onClose, chatId, message, onSchedule,set
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const { user } = useSelector(state => state.userReducer);
-  // const { user } = ChatState();
-  // const handleSchedule = async () => {
-  //   if (!message || !dateTime) {
-  //     toast({
-  //       title: 'Please fill all the required fields',
-  //       status: 'warning',
-  //       // duration: 5000,
-  //       isClosable: true,
-  //       position: 'bottom',
-  //     });
-  //     return;
-  //   }
-  //    Validate date is in the future
-  //   const scheduledTime = new Date(dateTime);
-  //   if (scheduledTime <= new Date()) {
-  //     toast({
-  //       title: 'Scheduled time must be in the future',
-  //       status: 'warning',
-  //       duration: 5000,
-  //       isClosable: true,
-  //       position: 'bottom',
-  //     });
-  //     return;
-  //   }
-  //   try {
-  //     setLoading(true);
-      
-  //     const config = {
-  //       headers: {
-  //         Authorization: `Bearer ${user.token}`,
-  //       },
-  //     };
-      
-  //     const { data } = await axios.post(
-  //       '/api/message',
-  //       {
-  //         content: message,
-  //         chatId: chatId,
-  //         scheduledFor: dateTime,
-  //       },
-  //       config
-  //     );
-      
-  //     setLoading(false);
-  //     setMessage('');
-  //     setDateTime('');
-  //     onClose();
-      
-  //     toast({
-  //       title: 'Message scheduled successfully',
-  //       status: 'success',
-  //       duration: 5000,
-  //       isClosable: true,
-  //       position: 'bottom',
-  //     });
-  //   } catch (error) {
-  //     setLoading(false);
-  //     toast({
-  //       title: 'Error scheduling message',
-  //       description: error.response?.data?.message || 'Something went wrong',
-  //       status: 'error',
-  //       duration: 5000,
-  //       isClosable: true,
-  //       position: 'bottom',
-  //     });
-  //   }
-  // };
+  
   const handleSchedule = async () => {
     if (!message || !dateTime) {
       toast({ title: 'Please fill all fields', status: 'warning' });

@@ -1,8 +1,8 @@
-import { axiosInstance } from ".";
+import { axiosInstance,url } from ".";
 
 export const createNewMessage= async(message)=>{
     try{
-        const response =await axiosInstance.post('api/message/new-message',message)
+        const response =await axiosInstance.post(url+'api/message/new-message',message)
         return response.data
     }
     catch(error){
@@ -13,7 +13,7 @@ export const createNewMessage= async(message)=>{
 
 export const getAllmesssage=async(chatId)=>{
     try{
-      const response=await axiosInstance.get(`api/message/get-all-messages/${chatId}`)
+      const response=await axiosInstance.get(url+`api/message/get-all-messages/${chatId}`)
       return response.data
     }
     catch(error){
@@ -23,8 +23,8 @@ export const getAllmesssage=async(chatId)=>{
 export const getScheduledMessages = async (chatId = null) => {
     try {
         const endpoint = chatId 
-            ? `api/message/scheduled?chatId=${chatId}`
-            : 'api/message/scheduled';
+            ? url+`api/message/scheduled?chatId=${chatId}`
+            : url+'api/message/scheduled';
         
         const response = await axiosInstance.get(endpoint);
         const data=Array.isArray(response.data)?response.data :[];
@@ -43,7 +43,7 @@ export const getScheduledMessages = async (chatId = null) => {
 
 export const cancelScheduledMessage = async (messageId) => {
     try {
-        const response = await axiosInstance.delete(`api/message/scheduled/${messageId}`);
+        const response = await axiosInstance.delete(url+`api/message/scheduled/${messageId}`);
         return {
             success: true,
             message: response.message
@@ -59,7 +59,7 @@ export const cancelScheduledMessage = async (messageId) => {
 export const editScheduledMessage = async (messageId, updates) => {
     try {
         const response = await axiosInstance.put(
-            `api/message/scheduled/${messageId}`,
+            url+`api/message/scheduled/${messageId}`,
             updates
         );
         return {
@@ -77,7 +77,7 @@ export const editScheduledMessage = async (messageId, updates) => {
 // Additional helper function to process scheduled messages
 export const processScheduledMessages = async () => {
     try {
-        const response = await axiosInstance.get('api/message/process-scheduled');
+        const response = await axiosInstance.get(url+'api/message/process-scheduled');
         return {
             success: true,
             data: response.data
@@ -91,8 +91,7 @@ export const processScheduledMessages = async () => {
 };
 export const  generateAImessage = async (data) => {
     try {
-        const response = await axiosInstance.post('api/message/generate-ai-message',data);
-        console.log(`response in apicalls/generateAImessage--> ${response}`)
+        const response = await axiosInstance.post(url+'api/message/generate-ai-message',data);
         
         return {
             success: true,

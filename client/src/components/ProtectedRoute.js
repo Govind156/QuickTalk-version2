@@ -7,7 +7,6 @@ import {setUser,setAllUser, setAllChats} from '../redux/usersSlice'
 import {toast} from 'react-hot-toast'
 import { getAllchats } from '../apiCalls/chat'
 function ProtectedRoute({children}){
-  // const [user,setUser]=useState(null)
   const {user}=useSelector(state=>state.userReducer)
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -73,10 +72,6 @@ function ProtectedRoute({children}){
  },[])
   return(
     <div>
-        {/* <p>Name:{user?.firstName+' '+user?.LastName}</p>
-        <br></br>
-        <p>Email:{user?.email}</p>
-        <br></br> */}
         {children}
     </div>
   )

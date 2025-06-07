@@ -1,9 +1,9 @@
 import axios from "axios";
-import { axiosInstance } from "./index";
+import { axiosInstance,url } from "./index";
 
 export const signupUser=async(user)=>{
     try{
-        const response =await axiosInstance.post('/api/auth/signup',user)
+        const response =await axiosInstance.post(url+'/api/auth/signup',user)
         return response.data
     }catch(error){
         return error;
@@ -11,7 +11,7 @@ export const signupUser=async(user)=>{
 }
 export const verifysignup=async(verificationcode)=>{
     try{
-        const response =await axiosInstance.post('/api/auth/verifysignup',verificationcode)
+        const response =await axiosInstance.post(url+'/api/auth/verifysignup',verificationcode)
         return response.data
     }
     catch(error){
@@ -22,7 +22,7 @@ export const verifysignup=async(verificationcode)=>{
 
 export const logInUser=async(user)=>{
     try{
-        const response=await axiosInstance.post('/api/auth/login',user)
+        const response=await axiosInstance.post(url+'/api/auth/login',user)
         return response.data
     }
     catch(error){

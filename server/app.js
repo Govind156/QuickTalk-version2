@@ -1,5 +1,6 @@
 const express=require('express')
 const app=express();
+const cors=require('cors')
 const authrouter=require('./controllers/authcontroller')
 const userrouter=require('./controllers/usercontroller')
 const chatrouter=require('./controllers/chatcontroller')
@@ -14,6 +15,7 @@ const { initializeMessageScheduler } = require('./services/messagescheduler');
 
 
 //middleware
+app.use(cors())
 app.use((req, res, next) => {
     req.io = io;
     next();

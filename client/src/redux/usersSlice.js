@@ -20,23 +20,6 @@ const userSlice=createSlice({
         setAllChats:(state,action)=>{state.Allchats=action.payload;},
         setSelectedChat:(state,action)=>{state.selectedchat=action.payload;},
         setScheduledMessages: (state, action) =>{state.scheduledMessages = action.payload;},
-        // addScheduledMessage: (state, action) => {  
-        //     if (!Array.isArray(state.scheduledMessages)) {
-        //      state.scheduledMessages = [];
-        //     }
-        //       // Ensure payload exists and has required properties
-        //     if (!action.payload || !action.payload._id) {
-        //       console.error("Invalid message data in addScheduledMessage");
-        //       return;
-        //     }
-        //      // Remove if temporary message exists
-        //     state.scheduledMessages = state.scheduledMessages.filter(
-        //         msg => !(msg._id.startsWith('temp-') && 
-        //             msg.sender === action.payload.sender &&
-        //             msg.chatId === action.payload.chatId)
-        //     );
-        //     state.scheduledMessages.push(action.payload);
-        // },
         addScheduledMessage: (state, action) => {
           if (!Array.isArray(state.scheduledMessages)) {
             state.scheduledMessages = [];
@@ -69,8 +52,6 @@ const userSlice=createSlice({
           
           state.scheduledMessages.push(action.payload);
         },
-        // removeScheduledMessage: (state, action) => {state.scheduledMessages = state.scheduledMessages.filter(msg => msg._id !== action.payload);
-        // },
         removeScheduledMessage: (state, action) => {
           if (!action.payload) {
             console.error("Invalid ID in removeScheduledMessage");
@@ -86,31 +67,6 @@ const userSlice=createSlice({
             msg => msg && msg._id !== action.payload
           );
         },
-        // updateScheduledMessage: (state, action) => {
-        //     if (!Array.isArray(state.scheduledMessages)) {
-        //       state.scheduledMessages = [];
-        //     }
-            
-        //     const existingIndex = state.scheduledMessages.findIndex(
-        //       msg => msg._id === action.payload._id
-        //     );
-            
-        //     if (existingIndex >= 0) {
-        //       // Preserve critical scheduling fields
-        //       state.scheduledMessages[existingIndex] = {
-        //         ...action.payload,
-        //         scheduled: true,  // Always maintain as true for updates
-        //         sent: false       // Always maintain as false for updates
-        //       };
-        //     } else {
-        //       // For new messages, ensure scheduling flags are set
-        //       state.scheduledMessages.push({
-        //         ...action.payload,
-        //         scheduled: true,
-        //         sent: false
-        //       });
-        //     }
-        // },
         updateScheduledMessage: (state, action) => {
           if (!Array.isArray(state.scheduledMessages)) {
             state.scheduledMessages = [];

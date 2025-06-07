@@ -39,12 +39,7 @@ import {removeScheduledMessage,updateScheduledMessage,addScheduledMessage} from 
 import { cancelScheduledMessage, editScheduledMessage ,getScheduledMessages,setScheduledMessages} from '../../../apiCalls/message';
 
 const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
-  // const [scheduledMessages, setScheduledMessages] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [selectedMessage, setSelectedMessage] = useState(null);
-  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  // const [editMessage, setEditMessage] = useState('');
-  // const [editDateTime, setEditDateTime] = useState('');
+  
   const {user}=useSelector(state=>state.userReducer)
   const dispatch = useDispatch();
   const toast = useToast();
@@ -162,74 +157,7 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
         Scheduled Messages
       </Text>
 
-      {/* {scheduledMessages.length === 0 ? (
-        <Box textAlign="center" py={5}>
-          <Text color="gray.500">No scheduled messages</Text>
-        </Box>
-      ) : (
-        <Box
-        flex="1" 
-        overflowY="auto" // This enables vertical scrolling
-        css={{
-          '&::-webkit-scrollbar': {
-            width: '8px',
-          },
-          '&::-webkit-scrollbar-track': {
-            background: '#f1f1f1',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: '#888',
-            borderRadius: '4px',
-          },
-          '&::-webkit-scrollbar-thumb:hover': {
-            background: '#555',
-          }
-        }}
-        >
-          {scheduledMessages.map((msg) => (
-            <Box 
-              key={msg._id} 
-              borderWidth="1px" 
-              borderRadius="md" 
-              p={3}
-              mb={3}
-              bg="white"
-              boxShadow="sm"
-            >
-              <Flex justify="space-between" align="center" mb={2}>
-                <Badge colorScheme="red">
-                  {msg.chatId?.isGroupChat ? msg.chatId.chatName : "Private Chat"}
-                </Badge>
-                <Text fontSize="sm" color="gray.500">
-                  {formatScheduledTime(msg.scheduledFor)}
-                </Text>
-              </Flex>
-
-              <Text mb={2}>{msg.text || "(Image message)"}</Text>
-
-              <Flex justify="flex-end">
-                <IconButton
-                  icon={<EditIcon />}
-                  size="sm"
-                  mr={2}
-                  onClick={() => openEditModal(msg)}
-                  aria-label="Edit message"
-                  colorScheme="blue"
-                  isLoading={isUpdating && editingMessage?._id === msg._id}
-                />
-                <IconButton
-                  icon={<DeleteIcon />}
-                  size="sm"
-                  colorScheme="red"
-                  onClick={() => handleCancel(msg._id)}
-                  aria-label="Cancel message"
-                  isLoading={isDeleting}
-                />
-              </Flex>
-            </Box>
-          ))}
-        </Box>
-      )} */}
+     
       {scheduledMessages.length === 0 ? (
       <Box textAlign="center" py={5}>
         <Text color="gray.500">No scheduled messages</Text>

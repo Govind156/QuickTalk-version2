@@ -1,9 +1,9 @@
 import axios from "axios";
-import { axiosInstance } from "./index"; 
+import { axiosInstance ,url} from "./index"; 
 import { useTheme } from "@chakra-ui/react";
 export const getloggedUser=async ()=>{
     try{
-        const response=await axiosInstance.get('api/user/get-logged-user')
+        const response=await axiosInstance.get(url+'api/user/get-logged-user')
         return response.data
     }
     catch(error){
@@ -12,7 +12,7 @@ export const getloggedUser=async ()=>{
 }
 export const getAllUser=async ()=>{
     try{
-        const response=await axiosInstance.get('api/user/get-all-users')
+        const response=await axiosInstance.get(url+'api/user/get-all-users')
         return response.data
     }
     catch(error){
@@ -21,7 +21,7 @@ export const getAllUser=async ()=>{
 }
 export const uploadProfilePic=async(image)=>{
     try{
-        const response=await axiosInstance.post('api/user/upload-profile-pic',{image})
+        const response=await axiosInstance.post(url+'api/user/upload-profile-pic',{image})
         return response.data
     }
     catch(error){
@@ -30,7 +30,7 @@ export const uploadProfilePic=async(image)=>{
 }
 export const updateUserThemePreference = async (userId, theme) => {
     try {
-        const response = await axiosInstance.put('api/user/theme',{userId,theme})
+        const response = await axiosInstance.put(url+'api/user/theme',{userId,theme})
         return response.data
         return data;
     } catch (error) {
@@ -40,7 +40,7 @@ export const updateUserThemePreference = async (userId, theme) => {
 
 export const deleteUser = async (userId) => {
     try {
-        const response = await axiosInstance.delete(`api/user/delete-user/${userId}`);
+        const response = await axiosInstance.delete(url+`api/user/delete-user/${userId}`);
         return response.data;
     } catch (error) {
         return error;

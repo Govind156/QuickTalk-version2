@@ -143,12 +143,7 @@ function Header({socket}){
         let lname=user?.LastName.at(0).toUpperCase()+user?.LastName.slice(1).toLowerCase();
         return fname+" "+lname
     }
-    // const logout=()=>{
-    //     localStorage.removeItem('token')
-    //     toast.success("Logged out successfully"); 
-    //     navigate('/login')
-    //     socket.emit('user-offline',user._id)
-    // }
+   
     const logout = () => {
         if (socket && user?._id) {
           socket.emit('user-offline', user._id);

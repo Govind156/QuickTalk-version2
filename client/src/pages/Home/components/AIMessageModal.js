@@ -58,19 +58,15 @@ const AIMessageModal = ({ isOpen, onClose, onSend }) => {
       
       const finalprompt= {prompt: tone !== 'default' ? `${prompt} (${tone} tone)` : prompt}
       
-      console.log(`finalprompt send to AI -->${finalprompt.prompt}`)
+      
       if(finalprompt.prompt === undefined){
-        console.log(`since finalprompt is not defined then stop here `)
         return;
       }
       dispatch(setAILoading());
 
       const {success, data, message} = await generateAImessage( {prompt:finalprompt.prompt});
       
-      console.log(`response we get after generate api call  -->`);
-      console.log(`success-->${success}`)
-      console.log(`data--->${data}`)
-      console.log(`data.message-->${data.data}`)
+      
 
 
       if (success) {
