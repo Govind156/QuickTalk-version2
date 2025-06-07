@@ -7,8 +7,7 @@ const chatrouter=require('./controllers/chatcontroller')
 const messagerouter=require('./controllers/messagecontroller')
 const server=require('http').createServer(app)
 const io=require('socket.io')(server,{cors:{
-    origin:'http://localhost:3000',
-    methods:['GET','POST']
+    origin:'https://quicktalk-version2-client.onrender.com'
 }})
 // Import the message scheduler
 const { initializeMessageScheduler } = require('./services/messagescheduler');
