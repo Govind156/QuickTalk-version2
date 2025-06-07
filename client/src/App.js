@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux'
 import {io} from 'socket.io-client' 
 import { ChakraProvider ,extendTheme} from '@chakra-ui/react';
 const theme = extendTheme({});
-const socket=io('https://quicktalk-version2-server.onrender.com')
+const socket=io('https://quicktalk-version2-server.onrender.com/')
 function App(){
    const {loader}=useSelector(state=>state.loaderReducer)
   return (

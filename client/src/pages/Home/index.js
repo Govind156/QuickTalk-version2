@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { setAddNewUser } from "../../redux/usersSlice";
 
 //this makes sure that our client app is connected to server app
-const socket=io('https://quicktalk-version2-server.onrender.com')
+const socket=io('https://quicktalk-version2-server.onrender.com/')
 
 function Home(){
     const {selectedchat,user}=useSelector(state=>state.userReducer)
