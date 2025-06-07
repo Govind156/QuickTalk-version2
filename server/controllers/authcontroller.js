@@ -4,7 +4,7 @@ const bcryptjs=require('bcryptjs')
 const usermodel=require('../models/usermodel')
 const jwt=require('jsonwebtoken')
 const { SendEmail } = require('../middlewares/sendtransporter')
-const { Sendverificationcode,WelcomeEmail} = require('../middlewares/sendemail')
+const { Sendverificationcode,WelcomeEmail} = require('../middlewares/sendEmail')
 const ZEROBOUNCE_API_KEY=process.env.ZEROBOUNCE_API_KEY;
 
 const axios = require("axios");
