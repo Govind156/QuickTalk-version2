@@ -133,30 +133,7 @@ io.on('connection',socket=>{
         // Broadcast to all clients that a user was deleted
         io.emit('user-deleted', data);
     });
-    // socket.on('mark-scheduled-read', (data) => {
-    //     // Notify all members (especially the sender) that messages were read
-    //     data.members.forEach(memberId => {
-    //       io.to(memberId).emit('message-count-cleared', {
-    //         chatId: data.chatId,
-    //         readerId: data.readerId,
-    //         readAt: new Date().toISOString()
-    //       });
-    //     });
-    //   });
-    // socket.on('send-scheduled-message', (message) => {
-    //     if (!deliveredMessages.has(message.deliveryId)) {
-    //       deliveredMessages.add(message.deliveryId);
-          
-    //       // Set expiration for tracking (1 hour)
-    //       setTimeout(() => {
-    //         deliveredMessages.delete(message.deliveryId);
-    //       }, 3600000);
-    
-    //       io.to(message.members[0])
-    //         .to(message.members[1])
-    //         .emit('receive-schedule-message', message);
-    //     }
-    // });
+   
 
 });
 

@@ -67,6 +67,10 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
       toast({ title: 'Invalid message data', status: 'error' });
       return;
     }
+    if (new Date(editedDateTime) < new Date()) {
+     toast({ title: 'Time must be in the future', status: 'warning' });
+     return;
+    }
   
     try {
       setIsUpdating(true);
@@ -89,7 +93,8 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
       // For existing messages in DB
       const response = await editScheduledMessage(editingMessage._id, {
         text: editedContent,
-        scheduledFor: editedDateTime,
+        // scheduledFor: editedDateTime,
+        scheduledFor: new Date(editedDateTime).toISOString(),
         // Explicitly maintain these flags
         scheduled: true,
         sent: false
