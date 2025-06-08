@@ -249,7 +249,7 @@ router.put('/scheduled/:messageId', Authmiddleware, async (req, res) => {
       { _id: messageId, scheduled: true, sent: false },
       { 
         $set: {
-          content,
+          text:content,
           scheduledFor: scheduledTime,
           updatedAt: new Date(),
            // Explicitly maintain these flags
