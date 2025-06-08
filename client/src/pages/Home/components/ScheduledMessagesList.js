@@ -100,6 +100,11 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
 
       if (response.success) {
         dispatch(updateScheduledMessage(response.data));
+         const refreshed = await getScheduledMessages(response.data.chatId);
+          if (refreshed.success) {
+            const pending = refreshed.data.filter(msg => !msg.sent);
+            dispatch(setScheduledMessages(pending));
+          }
         setIsEditModalOpen(false);
         toast({ title: 'Message updated', status: 'success' });
         // if (onEdit) onEdit();
