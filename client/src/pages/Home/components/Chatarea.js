@@ -154,7 +154,7 @@ function Chatarea({socket}){
     // Edit a scheduled message
     const handleEditScheduled = async (messageId, newContent, newTime) => {
       const response = await editScheduledMessage(messageId, {
-        content: newContent,
+        text: newContent,
         scheduledFor: newTime
       });
       if (response.success) {
@@ -284,16 +284,7 @@ function Chatarea({socket}){
     };
   
 
-    // useEffect(() => {
-    //   // Check every 10 seconds (adjust interval as needed)
-    //   const interval = setInterval(checkAndSendScheduledMessages, 10000);
-      
-    //   // Initial check when component mounts or dependencies change
-    //   checkAndSendScheduledMessages();
-      
-    //   // Cleanup interval on unmount
-    //   return () => clearInterval(interval);
-    // }, [checkAndSendScheduledMessages]);
+   
 
     
     
@@ -436,12 +427,10 @@ function Chatarea({socket}){
             if (data._id && typeof data._id === 'string' && !data._id.startsWith('temp-')) {
               await editScheduledMessage(data._id, {
                 sent: true,
-                scheduled: false
+                scheduled: false,
+                scheduledFor:null,
               });
             }
-        //try by me when handle by server
-        dispatch(updateScheduledMessage({...data,sent:true}))
-
         
       };
     

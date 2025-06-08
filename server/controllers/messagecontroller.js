@@ -233,7 +233,7 @@ router.get('/process-scheduled', async (req, res) => {
 router.put('/scheduled/:messageId', Authmiddleware, async (req, res) => {
   try {
     const { messageId } = req.params;
-    const { content, scheduledFor } = req.body;
+    const { text, scheduledFor } = req.body;
 
     // Validate scheduled time
     const scheduledTime = new Date(scheduledFor);
@@ -249,7 +249,7 @@ router.put('/scheduled/:messageId', Authmiddleware, async (req, res) => {
       { _id: messageId, scheduled: true, sent: false },
       { 
         $set: {
-          text:content,
+          text,
           scheduledFor: scheduledTime,
           updatedAt: new Date(),
            // Explicitly maintain these flags
