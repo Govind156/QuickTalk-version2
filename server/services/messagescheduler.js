@@ -4,11 +4,12 @@ const Chat = require('../models/chatmodel');
 const initializeMessageScheduler = (io) => {
   cron.schedule('* * * * *', async () => {
     try {
-      const currentTime = new Date();    
+      const currentTime = new Date(); 
+      const bufferTime = new Date(currentTime.getTime() + 60000); // +1 minute buffer   
       const messagesToSend = await Message.find({
         scheduled: true,
         sent: false,
-        scheduledFor: { $lte: currentTime }
+        scheduledFor: { $lte: bufferTime }
       }).populate({
         path: "chatId",
         populate: {
