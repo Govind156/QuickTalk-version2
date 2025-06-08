@@ -47,7 +47,7 @@ const ScheduleMessageModal = ({ isOpen, onClose, chatId, message, onSchedule,set
 
     try {
       setLoading(true);
-      onSchedule(dateTime);
+      onSchedule(new Date(dateTime).toISOString());
       onClose();
     } catch (error) {
       toast({ title: 'Error scheduling message', status: 'error' });

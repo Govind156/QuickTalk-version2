@@ -165,6 +165,10 @@ function Chatarea({socket}){
       }
     };
 
+    const formatScheduledTime = (timestamp) => {
+      return moment(timestamp).format('MMM D, hh:mm A');
+    };
+
 
     const formatTime=(timestamp)=>{
       const now=moment()
@@ -180,9 +184,7 @@ function Chatarea({socket}){
         return moment(timestamp).format('MMM D,hh:mm A')
       }
     }
-    const formatScheduledTime = (timestamp) => {
-      return moment(timestamp).format('MMM D, hh:mm A');
-    };
+    
 
     const clearUnreadMessage = async () => {
       try {

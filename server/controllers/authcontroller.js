@@ -115,8 +115,7 @@ router.post('/login',async (req,res)=>{
             .select('+password +isVerified')
             .lean();
 
-        // console.log(user.email)
-        // console.log(user.password)
+        
 
         if(!user){
             return res.send({

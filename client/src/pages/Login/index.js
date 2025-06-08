@@ -25,7 +25,7 @@ function Login({socket}){
            window.location.href="/";
 
          }else{
-           toast.error(`hhh-${response.message}`);
+           toast.error(`${response.message}`);
            if(response.message === "Account not verified"){
             setTimeout(() => {
                 navigate("/VerifySignup"); 
