@@ -33,8 +33,9 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 // import { ChatState } from '../Context/ChatProvider';
 import { useSelector, useDispatch } from 'react-redux';
-import {removeScheduledMessage,updateScheduledMessage,addScheduledMessage} from '../../../redux/usersSlice'
-import { cancelScheduledMessage, editScheduledMessage ,getScheduledMessages,setScheduledMessages} from '../../../apiCalls/message';
+import {removeScheduledMessage,updateScheduledMessage,addScheduledMessage,setScheduledMessages} from '../../../redux/usersSlice'
+import { cancelScheduledMessage, editScheduledMessage ,getScheduledMessages} from '../../../apiCalls/message';
+
 
 const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
   
