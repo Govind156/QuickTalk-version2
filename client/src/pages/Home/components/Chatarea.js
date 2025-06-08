@@ -161,6 +161,7 @@ function Chatarea({socket}){
       });
       if (response.success) {
         dispatch(updateScheduledMessage(response.data));
+        fetchScheduledMessages();
         toast.success("Message updated");
       } else {
         toast.error(response.message);

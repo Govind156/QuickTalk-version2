@@ -76,26 +76,30 @@ const userSlice=createSlice({
             msg => msg._id === action.payload._id
           );
           
-          if (existingIndex >= 0) {
-            state.scheduledMessages[existingIndex] = {
-              ...state.scheduledMessages[existingIndex],
-              ...action.payload,
-              // Only override these flags if explicitly provided
-              scheduled: action.payload.hasOwnProperty('scheduled') 
-                ? action.payload.scheduled 
-                : state.scheduledMessages[existingIndex].scheduled || true,
-              sent: action.payload.hasOwnProperty('sent')
-                ? action.payload.sent
-                : state.scheduledMessages[existingIndex].sent || false
-            };
-          } else {
-            // For new messages, ensure scheduling flags are set
-            state.scheduledMessages.push({
-              ...action.payload,
-              scheduled: action.payload.scheduled ?? true,
-              sent: action.payload.sent ?? false
-            });
-          }
+         if (existingIndex >= 0) {
+          state.scheduledMessages[existingIndex] = {
+            ...state.scheduledMessages[existingIndex],
+            ...action.payload,
+            // Explicitly override values if provided in payload
+            scheduled: action.payload.hasOwnProperty('scheduled')
+              ? action.payload.scheduled
+              : state.scheduledMessages[existingIndex].scheduled,
+            sent: action.payload.hasOwnProperty('sent')
+              ? action.payload.sent
+              : state.scheduledMessages[existingIndex].sent,
+            scheduledFor: action.payload.hasOwnProperty('scheduledFor')
+              ? action.payload.scheduledFor
+              : state.scheduledMessages[existingIndex].scheduledFor
+          };
+        } else {
+          // For new messages
+          state.scheduledMessages.push({
+            ...action.payload,
+            scheduled: action.payload.scheduled ?? true,
+            sent: action.payload.sent ?? false,
+            scheduledFor: action.payload.scheduledFor ?? null
+          });
+        }
         },
         setAddNewUser: (state, action) => {
           // Check if user already exists in Alluser array
