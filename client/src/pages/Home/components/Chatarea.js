@@ -155,7 +155,9 @@ function Chatarea({socket}){
     const handleEditScheduled = async (messageId, newContent, newTime) => {
       const response = await editScheduledMessage(messageId, {
         text: newContent,
-        scheduledFor: newTime
+        scheduledFor: newTime,
+        scheduled:true,
+        sent:false,
       });
       if (response.success) {
         dispatch(updateScheduledMessage(response.data));
@@ -421,7 +423,9 @@ function Chatarea({socket}){
     useEffect(() => {
       const handleScheduledMessageSent = async(data) => {
          //try by me when handle by server
-         dispatch(updateScheduledMessage({...data,sent:true}))
+         dispatch(updateScheduledMessage({...data,sent:true,
+                scheduled: false,
+                scheduledFor:null,}))
        
         //try by me -update server status
             if (data._id && typeof data._id === 'string' && !data._id.startsWith('temp-')) {
@@ -429,6 +433,7 @@ function Chatarea({socket}){
                 sent: true,
                 scheduled: false,
                 scheduledFor:null,
+                text:data.text
               });
             }
         
