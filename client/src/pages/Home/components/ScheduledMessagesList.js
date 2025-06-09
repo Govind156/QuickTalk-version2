@@ -103,12 +103,12 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
         dispatch(updateScheduledMessage(response.data));
          const refreshed = await getScheduledMessages(response.data.chatId);
           if (refreshed.success) {
-            const pending = refreshed.data.filter(msg => !msg.sent);
+            const messages = Array.isArray(refreshed.data) ? refreshed.data : [];
+            const pending = messages.filter(msg => !msg.sent);
             dispatch(setScheduledMessages(pending));
           }
         setIsEditModalOpen(false);
         toast({ title: 'Message updated', status: 'success' });
-        // if (onEdit) onEdit();
       }
     } catch (error) {
       // Revert optimistic update on error
