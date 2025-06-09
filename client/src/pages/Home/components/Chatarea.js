@@ -105,7 +105,7 @@ function Chatarea({socket}){
           if (response.success) {
             // Filter out already sent messages
             const messages = Array.isArray(response.data) ? response.data : [];
-            const pendingMessages = messages.filter(msg => !msg.sent);
+            const pendingMessages = messages.filter(msg => msg.scheduled && !msg.sent);
             dispatch(setScheduledMessages(pendingMessages));
           }
           else{
@@ -161,7 +161,7 @@ function Chatarea({socket}){
       });
       if (response.success) {
         dispatch(updateScheduledMessage(response.data));
-        fetchScheduledMessages();
+        // fetchScheduledMessages();
         toast.success("Message updated");
       } else {
         toast.error(response.message);
@@ -423,21 +423,28 @@ function Chatarea({socket}){
 
     useEffect(() => {
       const handleScheduledMessageSent = async(data) => {
-         //try by me when handle by server
-         dispatch(updateScheduledMessage({...data,sent:true,
-                scheduled: false,
-                scheduledFor:null,}))
+         
        
         //try by me -update server status
             if (data._id && typeof data._id === 'string' && !data._id.startsWith('temp-')) {
-              await editScheduledMessage(data._id, {
+              const response=await editScheduledMessage(data._id, {
                 sent: true,
                 scheduled: false,
                 scheduledFor:null,
                 text:data.text
               });
+
+              if (response.success) {
+              dispatch(updateScheduledMessage(response.data));  
+              } 
+
+
             }
-        
+        //try by me when handle by server
+        //  dispatch(updateScheduledMessage({...data,sent:true,
+        //         scheduled: false,
+        //         scheduledFor:null,}))
+
       };
     
       const handleNewMessage = (message) => {

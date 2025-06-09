@@ -92,7 +92,6 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
       // For existing messages in DB
       const response = await editScheduledMessage(editingMessage._id, {
         text: editedContent,
-        // scheduledFor: editedDateTime,
         scheduledFor: new Date(editedDateTime).toISOString(),
         // Explicitly maintain these flags
         scheduled: true,
@@ -104,7 +103,7 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
          const refreshed = await getScheduledMessages(response.data.chatId);
           if (refreshed.success) {
             const messages = Array.isArray(refreshed.data) ? refreshed.data : [];
-            const pending = messages.filter(msg => !msg.sent);
+            const pending = messages.filter(msg =>  msg.scheduled && !msg.sent);
             dispatch(setScheduledMessages(pending));
           }
         setIsEditModalOpen(false);
