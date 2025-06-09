@@ -543,7 +543,10 @@ function Chatarea({socket}){
                   }}>
                     <ScheduledMessagesList 
                       scheduledMessages={Array.isArray(scheduledMessages) ? 
-                        scheduledMessages.filter(msg => msg.chatId === selectedchat._id) : 
+                        scheduledMessages.filter(msg => 
+                             msg.chatId === selectedchat._id && 
+                             msg.scheduled && 
+                             !msg.sent) : 
                         []}
                       onCancel={handleCancelScheduled}
                       onEdit={handleEditScheduled}
