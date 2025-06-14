@@ -609,6 +609,17 @@ i{
   margin-top: -3px;
   /* margin-bottom: 40px; */
 }
+.format-message-btn{
+  position: absolute;
+  right: 200px;
+  font-size: 25px;
+  color: #e74c3c;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  margin-top: 5px;
+}
+ 
 /*******************************************************
 ***************CSS FOR CHAT MESSAGES********************
 ********************************************************/
@@ -1672,20 +1683,8 @@ input, textarea, button, img {
   border-radius: 50%;
   width: 31px;
   height: 31px;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
 }
-/* .send-image-btn{
-  position: absolute;
-  right: 80px;
-  font-size: 25px;
-  color: #e74c3c;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  margin-top: 5px;
-} */
+
 
 .ai-assist-btn:hover {
   color: #c0392b; /* Darker red on hover */

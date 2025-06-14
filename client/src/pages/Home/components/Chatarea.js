@@ -17,6 +17,7 @@ import ScheduleMessageModal from './ScheduleMessageModal'
 import ScheduledMessagesList from './ScheduledMessagesList';
 import { useDisclosure } from '@chakra-ui/react';
 import AIMessageModal from './AIMessageModal'
+import MarkdownEditorModal from "./MarkdownEditorModal";
 import { Tooltip } from '@chakra-ui/react'
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
@@ -52,7 +53,13 @@ function Chatarea({socket}){
       isOpen: isAIModalOpen, 
       onOpen: onAIModalOpen, 
       onClose: onAIModalClose 
-    } = useDisclosure(); 
+    } = useDisclosure();
+    
+    const {
+      isOpen: isMarkdownEditorOpen,
+      onOpen: onMarkdownEditorOpen,
+      onClose: onMarkdownEditorClose
+    } = useDisclosure();
     
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
      const mdParser = new MarkdownIt();
@@ -633,7 +640,13 @@ function Chatarea({socket}){
                   onSend={(aiMessage) => {
                     setMessage(aiMessage); // Populate input with AI message
                   }}
-                />
+                 />
+                  <MarkdownEditorModal
+                    isOpen={isMarkdownEditorOpen}
+                    onClose={onMarkdownEditorClose}
+                    message={message}
+                    setMessage={setMessage}
+                  />
 
                  {!showScheduledList && <div className="send-message-div">
                      <div className={currentChatUser?.deleted ? "disabled-chat-area" : ""}> 
@@ -697,7 +710,6 @@ function Chatarea({socket}){
                       py={1}
                       px={2}
                       borderRadius="md"
-                      // openDelay={300} // Shows after 300ms of hover
                     >
                       <button
                         // className={`ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
@@ -706,11 +718,18 @@ function Chatarea({socket}){
                         disabled={currentChatUser?.deleted}
                         aria-label="AI Message Assistant"
                       >
-                        {/* <i className="fas fa-robot"></i> */}
                         <i className="fa-solid fa-wand-sparkles" style={{ color: '#6e40ff' }}></i>
                         {/* <i className="fas fa-sparkle fa-pulse"></i> */}
                       </button>
                      </Tooltip>
+
+                     <button
+                        className="fa fa-edit format-message-btn"
+                        onClick={onMarkdownEditorOpen}
+                        disabled={currentChatUser?.deleted}
+                        aria-label="format message"
+                     >
+                     </button>
                      </div> 
                   </div>}
               </div>
