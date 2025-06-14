@@ -696,7 +696,6 @@ function Chatarea({socket}){
                       <button
                           onClick={() => sendMessage('')}
                           className="fa fa-paper-plane send-message-btn"
-                          // aria-hidden="true"
                           aria-label="Send message"
                       >
                       </button>
@@ -722,11 +721,13 @@ function Chatarea({socket}){
                      </Tooltip> */}
 
                       <button
-                        className="fa-solid fa-wand-sparkles ai-assist-btn"
+                        className="ai-assist-btn"
                         onClick={onAIModalOpen}
                         disabled={currentChatUser?.deleted}
                         aria-label="AI Message Assistant"
-                      ></button>
+                      >
+                        <i className="fa-solid fa-wand-sparkles" style={{ color: '#6e40ff' }}></i>
+                      </button>
 
 
                      <button
