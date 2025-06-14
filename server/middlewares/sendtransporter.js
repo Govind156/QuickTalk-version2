@@ -11,4 +11,4 @@ const transporter=nodemailer.createTransport({
 })
 
 
-module.exports={transporter,SendEmail}
+module.exports={transporter}
