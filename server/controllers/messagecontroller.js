@@ -419,7 +419,9 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const aiMessage = response.text();
+    // const aiMessage = response.text();
+    const aiMessage = response.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
 
     if (!aiMessage) {
       throw new Error("No message content received from Gemini");
