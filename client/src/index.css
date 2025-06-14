@@ -577,6 +577,7 @@ i{
   background-color: transparent;
   margin-top: 5px;
 }
+
 .send-emoji-btn{
   position: absolute;
   right: 55px;
@@ -607,7 +608,6 @@ i{
   border: none;
   background-color: transparent;
   margin-top: -3px;
-  /* margin-bottom: 40px; */
 }
 .format-message-btn{
   position: absolute;
@@ -619,6 +619,7 @@ i{
   background-color: transparent;
   margin-top: 5px;
 }
+
  
 /*******************************************************
 ***************CSS FOR CHAT MESSAGES********************
@@ -1678,6 +1679,7 @@ input, textarea, button, img {
   border: none;
   margin-top: 5px;
   background-color: transparent;
+  margin-top: 8px;
   /* background: none; */
   /* padding: 4px; */
   /* transition: all 0.2s ease; */
