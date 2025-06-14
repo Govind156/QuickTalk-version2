@@ -665,7 +665,8 @@ function Chatarea({socket}){
                       // openDelay={300} // Shows after 300ms of hover
                     >
                       <button
-                        className={`ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
+                        // className={`ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
+                        className="fa-solid fa-wand-sparkles"
                         onClick={onAIModalOpen}
                         disabled={currentChatUser?.deleted}
                         aria-label="AI Message Assistant"
