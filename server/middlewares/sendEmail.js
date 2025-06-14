@@ -9,12 +9,10 @@ const Sendverificationcode=async(email,verificationcode)=>{
             text:"verify your code",
             html:Verification_Email_Template.replace("{verificationCode}",verificationcode),
         })
-    // console.log(response);
     return { success: true };
 
     }
     catch(error){
-        console.log(error);
         return { success: false, message: error.message };
     }
 }
@@ -27,7 +25,6 @@ const WelcomeEmail=async(email,name)=>{
             text:"Welcome",
             html:Welcome_Email_Template.replace("{name}",name),
         })
-    console.log(response);
     }
     catch(error){
         console.log(error);

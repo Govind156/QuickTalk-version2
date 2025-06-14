@@ -35,7 +35,7 @@ function Login({socket}){
          }
        }
        catch(error){
-        toast.error(`hello-${response.message || error.message}`)
+        toast.error(`${response.message || error.message}`)
        }
     }
 

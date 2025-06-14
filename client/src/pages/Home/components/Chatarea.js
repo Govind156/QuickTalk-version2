@@ -46,8 +46,7 @@ function Chatarea({socket}){
       isOpen: isAIModalOpen, 
       onOpen: onAIModalOpen, 
       onClose: onAIModalClose 
-    } = useDisclosure();
-    // const [currentChatUser, setCurrentChatUser] = useState(selecteduser);  
+    } = useDisclosure(); 
     
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
    
@@ -302,10 +301,8 @@ function Chatarea({socket}){
           const selectedchat=store.getState().userReducer.selectedchat
           if(selectedchat._id === data.chatId){
             setAllMessages(premsg=>[...premsg,data])
-            // console.log("allmessage of selected chat:"+allMessages)
           }
           if(selectedchat._id === data.chatId && data.sender !== user._id){
-            console.log("allmessage selected chat:"+allMessages);
             clearUnreadMessage();
           }
         })
@@ -359,17 +356,6 @@ function Chatarea({socket}){
                 ProfilePic: null,
                 email: `deleted-${Date.now()}@example.com`
               }));
-              // setCurrentChatUser(prev => ({
-              //   ...prev,
-              //   deleted: true,
-              //   deleted: true,
-              //   deletedAt: new Date(),
-              //   // Clear sensitive data
-              //   firstName: 'Deleted',
-              //   LastName: 'User',
-              //   email: `deleted-${Date.now()}@example.com`,
-              //   ProfilePic: null
-              // }));
 
               // 2. Show toast
               toast('This user has deleted their account', {
@@ -379,6 +365,8 @@ function Chatarea({socket}){
 
                // 3. Disable message input
               setMessage(''); // Clear any draft
+              dispatch(clearChatDraft({ chatId: selectedchat._id }));
+              setShowEmojiPicker(false);
           }
       });
     },[selectedchat,dispatch])
@@ -646,7 +634,6 @@ function Chatarea({socket}){
                       <button
                           onClick={() => { setShowEmojiPicker(!showEmojiPicker) }}
                           className="fa fa-smile-o send-emoji-btn"
-                          // aria-hidden="true"
                           aria-label="Send emoji"
                           disabled={currentChatUser?.deleted}
                       >
@@ -684,10 +671,9 @@ function Chatarea({socket}){
                         aria-label="AI Message Assistant"
                       >
                         {/* <i className="fas fa-robot"></i> */}
-                        <i className="fas fa-sparkles" style={{ color: '#6e40ff' }}></i>
-                        <i className="fas fa-sparkle fa-pulse"></i>
-                        {/* <i className="fas fa-bolt fa-bounce"></i>  */}
-                        
+                        {/* <i className="fas fa-sparkles" style={{ color: '#6e40ff' }}></i> */}
+                        <i className="fa-solid fa-wand-sparkles" style={{ color: '#6e40ff' }}></i>
+                        {/* <i className="fas fa-sparkle fa-pulse"></i> */}
                       </button>
                      </Tooltip>
                      </div> 

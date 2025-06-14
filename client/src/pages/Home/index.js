@@ -24,20 +24,6 @@ function Home(){
                 dispatch(setAddNewUser(newUser));
             });
 
-    
-            // const updateOnlineUsers = (onlineUsers) => {
-            //     setOnlineUsers(onlineUsers);
-            // };
-    
-            // socket.on('online-users', updateOnlineUsers);
-            // socket.on('online-users-updated', updateOnlineUsers);
-    
-            // 🔴 Important cleanup to avoid memory leaks
-            // return () => {
-            //     socket.off('online-users', updateOnlineUsers);
-            //     // socket.off('online-users-updated', updateOnlineUsers);
-            // };
-            //[user,onlineUser]
         }
 
         return ()=>{

@@ -43,7 +43,6 @@ io.on('connection',socket=>{
     })
     
     socket.on('send-message',(message)=>{
-        console.log(message)
 
         io.to(message.members[0]).to(message.members[1])
         .emit('receive-message',message)
@@ -60,19 +59,7 @@ io.on('connection',socket=>{
         .emit('started-typing',data)
     })
 
-    // socket.on('user-login', userId => {
-    //     if(!onlineUsers.includes(userId)){
-    //         onlineUsers.push(userId)
-    //     }
-    //     socket.emit('online-users', onlineUsers);
-    // })
-    // socket.on('user-login', userId => {
-    //     if (!onlineUsers.includes(userId)) {
-    //         onlineUsers.push(userId);
-    //     }
-    //     // Broadcast to all users that online users list has changed
-    //     io.emit('online-users-updated', onlineUsers);
-    // });
+    
     socket.on('user-login', userId => {
         onlineUsers.set(userId, socket.id);
         io.emit('online-users-updated', Array.from(onlineUsers.keys()));
@@ -80,14 +67,7 @@ io.on('connection',socket=>{
       });
 
 
-    // socket.on('user-offline', userId => {
-    //     onlineUsers.splice(onlineUsers.indexOf(userId), 1);
-    //     io.emit('online-users-updated', onlineUsers);
-    // })
-    // socket.on('user-offline', userId => {
-    //     onlineUsers = onlineUsers.filter(id => id !== userId);
-    //     io.emit('online-users-updated', onlineUsers);
-    // });
+   
     socket.on('user-offline', userId => {
         if (onlineUsers.has(userId)) {
           onlineUsers.delete(userId);

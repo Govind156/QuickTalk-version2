@@ -175,38 +175,38 @@ function Header({socket}){
 
     return (
         <div className="app-header">
-    <div className="app-logo">
-        <i className="fa fa-comments" aria-hidden="true"></i>
-          Quick Talk
-    </div>
-    <div className="app-header-controls">
-                <button 
-                    className="theme-toggle-btn"
-                    onClick={toggleTheme}
-                    aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                >
-                    {darkMode ? (
-                        <i className="fa fa-sun-o" aria-hidden="true"></i>
-                    ) : (
-                        <i className="fa fa-moon-o" aria-hidden="true"></i>
-                    )}
-                </button> 
-    <div className="app-user-profile">
-        {
-        user?.ProfilePic && 
-        <img src={user?.ProfilePic} alt='profile-pic' className="logged-user-profile-pic" 
-        onClick={()=>navigate('/profile')}>
-        </img>}
-        {!user?.ProfilePic && 
-        <div className="logged-user-profile-pic" onClick={()=>navigate('/profile')}>{getinitials()}
-        </div>}
-        <div className="logged-user-name">{formatName(user)}</div>
-        <button className='logout-btn' onClick={logout}>
-            <i className='fa fa-power-off'></i>
-        </button>
-    </div>
-   </div> 
- </div>
+            <div className="app-logo">
+                <i className="fa fa-comments" aria-hidden="true"></i>
+                Quick Talk
+            </div>
+            <div className="app-header-controls">
+                        <button 
+                            className="theme-toggle-btn"
+                            onClick={toggleTheme}
+                            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                        >
+                            {darkMode ? (
+                                <i className="fa fa-sun-o" aria-hidden="true"></i>
+                            ) : (
+                                <i className="fa fa-moon-o" aria-hidden="true"></i>
+                            )}
+                        </button> 
+                        <div className="app-user-profile">
+                            {
+                            user?.ProfilePic && 
+                            <img src={user?.ProfilePic} alt='profile-pic' className="logged-user-profile-pic" 
+                            onClick={()=>navigate('/profile')}>
+                            </img>}
+                            {!user?.ProfilePic && 
+                            <div className="logged-user-profile-pic" onClick={()=>navigate('/profile')}>{getinitials()}
+                            </div>}
+                            <div className="logged-user-name">{formatName(user)}</div>
+                            <button className='logout-btn' onClick={logout}>
+                                <i className='fa fa-power-off'></i>
+                            </button>
+                        </div>
+            </div> 
+       </div>
     )
 }
 export default Header;

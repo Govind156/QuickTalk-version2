@@ -139,8 +139,7 @@ router.post('/login',async (req,res)=>{
             });
         }
 
-        //  console.log(user.email)
-        // console.log(user.password)
+       
         //3.if user exist and password is correct then assign token
         const token=jwt.sign(
             {   
@@ -173,7 +172,6 @@ router.post('/verifysignup',async(req,res)=>{
         const user=await usermodel.findOne({
             verificationcode:verificationcode
         })
-        console.log("user=",user);
         if(!user){
             return res.send({
                 success:false,
@@ -183,8 +181,6 @@ router.post('/verifysignup',async(req,res)=>{
         user.isVerified=true;
         user.verificationcode=undefined
         await user.save()
-        const name = `${user.firstName} ${user.LastName}`;
-        console.log("name send during welcome=",name);
         WelcomeEmail(user.email,name)
         return res.send({
             success:true,

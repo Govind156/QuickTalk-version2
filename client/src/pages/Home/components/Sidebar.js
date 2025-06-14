@@ -12,7 +12,6 @@ function Sidebar({socket}){
             <Searchlist 
             searchkey={Searchkey}
             socket={socket} 
-            // onlineUser={onlineUser}
             setSearchKey={setSearchkey}>
             </Searchlist>
         </div>

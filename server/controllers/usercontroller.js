@@ -160,7 +160,6 @@ router.delete('/delete-user/:userId', authmiddleware, async (req, res) => {
 
         // Notify all clients about the deletion
         req.io.emit('user-deleted', {
-            // userId: user._id,
             userId:userId,
             deletedAt: new Date(),
             // Include all affected chat IDs

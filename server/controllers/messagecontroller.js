@@ -410,9 +410,12 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GoogleGenAI_API_KEY);
 
     const { prompt } = req.body;
-    console.log("in controller", prompt);
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Changed model name here
+    if (!prompt || typeof prompt !== 'string') {
+     return res.status(400).send({ success: false, message: "Invalid prompt" });
+    }
+
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
@@ -422,15 +425,12 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
       throw new Error("No message content received from Gemini");
     }
 
-    console.log("AI response:", aiMessage);
-
     res.status(200).send({
       success: true,
       data: aiMessage,
       message: "successful"
     });
   } catch (error) {
-    console.error("AI generation error:", error);
     res.status(500).send({
       success: false,
       message: "Failed to generate AI message",
@@ -441,8 +441,3 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
 
 module.exports=router
 
-// Add these new routes
-// Add these new controller functions
-// const getScheduledMessages = ;
-//   onst cancelScheduledMessage = ;
-//   const editScheduledMessage = ;
