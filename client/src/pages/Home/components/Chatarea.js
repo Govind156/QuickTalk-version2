@@ -580,7 +580,9 @@ function Chatarea({socket}){
                                       >
                                           <div>
                                               <div className={isCurrentUserSender ? "send-message" : "received-message"}>
-                                                  <div>{eachmessage.text}</div>
+                                                  <div>
+                                                    <ReactMarkdown>{eachmessage.text}</ReactMarkdown>
+                                                  </div>
                                                   <div>{eachmessage.image &&
                                                       <img src={eachmessage.image} alt="image" height="120" width="120"></img>}</div>
                                               </div>
@@ -634,7 +636,7 @@ function Chatarea({socket}){
 
                  {!showScheduledList && <div className="send-message-div">
                      <div className={currentChatUser?.deleted ? "disabled-chat-area" : ""}> 
-                      {/* <textarea
+                      <textarea
                           type="text"
                           className="send-message-input"
                           placeholder="Type a message"
@@ -642,15 +644,15 @@ function Chatarea({socket}){
                           disabled={currentChatUser?.deleted}
                           onChange={handleMessageChange}
                          rows='1' 
-                      /> */}
-                      <MdEditor
+                      />
+                      {/* <MdEditor
                         value={message}
                         className="send-message-input"
                         style={{ height: '200px' }}
                         renderHTML={(text) => mdParser.render(text)}
                         onChange={handleEditorChange}
                         readOnly={currentChatUser?.deleted}
-                      />
+                      /> */}
                       <label htmlFor="file">
                           <i className="fa fa-picture-o send-image-btn"></i>
                           <input
