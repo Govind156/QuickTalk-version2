@@ -1676,54 +1676,45 @@ input, textarea, button, img {
   color: #e74c3c; /* Matching your red theme */
   cursor: pointer;
   border: none;
-  /* background: none; */
-  padding: 4px;
   margin-top: 5px;
-  transition: all 0.2s ease;
-  border-radius: 50%;
-  width: 31px;
-  height: 31px;
+  background-color: transparent;
+  /* background: none; */
+  /* padding: 4px; */
+  /* transition: all 0.2s ease; */
+  /* border-radius: 50%; */
+  /* width: 31px; */
+  /* height: 31px; */
 }
 
 
-.ai-assist-btn:hover {
-  color: #c0392b; /* Darker red on hover */
-  background-color: rgba(231, 76, 60, 0.1); /* Subtle hover effect */
+
+  /* .ai-assist-btn:hover {
+  color: #c0392b; 
+  background-color: rgba(231, 76, 60, 0.1); 
   transform: scale(1.1);
-}
+} 
 
 .ai-assist-btn:disabled {
-  color: #bdc3c7; /* Gray when disabled */
+  color: #bdc3c7;
   cursor: not-allowed;
   opacity: 0.7;
   transform: none !important;
-}
+}  */
 
 /* Dark Mode Styles */
-[data-theme="dark"] .ai-assist-btn {
-  color: #9b59b6; /* Purple accent for dark mode */
+/* [data-theme="dark"] .ai-assist-btn {
+  color: #9b59b6; 
 }
 
 [data-theme="dark"] .ai-assist-btn:hover {
-  color: #8e44ad; /* Darker purple */
+  color: #8e44ad; 
   background-color: rgba(155, 89, 182, 0.1);
-}
-
-/* Tooltip styling to match existing design */
-/* .ai-assist-tooltip {
-  font-size: 12px !important;
-  background: #2c3e50 !important;
-  color: white !important;
-  padding: 5px 10px !important;
-  border-radius: 4px !important;
-}
-
-[data-theme="dark"] .ai-assist-tooltip {
-  background: #34495e !important;
 } */
 
+
+
 /* Icon animation */
-@keyframes ai-pulse {
+/* @keyframes ai-pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
@@ -1732,7 +1723,7 @@ input, textarea, button, img {
 .ai-assist-btn.active {
   animation: ai-pulse 1s infinite;
   color: #e74c3c;
-}
+} */
 
 /* Responsive adjustments */
 @media only screen and (max-width: 768px) {
