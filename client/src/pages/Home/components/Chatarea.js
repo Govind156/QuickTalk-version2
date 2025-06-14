@@ -666,13 +666,12 @@ function Chatarea({socket}){
                     >
                       <button
                         // className={`ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
-                        className="fa-solid fa-wand-sparkles"
+                        className={`fa-solid fa-wand-sparkles ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
                         onClick={onAIModalOpen}
                         disabled={currentChatUser?.deleted}
                         aria-label="AI Message Assistant"
                       >
                         {/* <i className="fas fa-robot"></i> */}
-                        {/* <i className="fas fa-sparkles" style={{ color: '#6e40ff' }}></i> */}
                         <i className="fa-solid fa-wand-sparkles" style={{ color: '#6e40ff' }}></i>
                         {/* <i className="fas fa-sparkle fa-pulse"></i> */}
                       </button>
