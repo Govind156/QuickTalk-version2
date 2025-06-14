@@ -700,7 +700,7 @@ function Chatarea({socket}){
                           aria-label="Send message"
                       >
                       </button>
-                      <Tooltip 
+                      {/* <Tooltip 
                       label="AI Assistant" 
                       placement="top"
                       hasArrow
@@ -712,16 +712,22 @@ function Chatarea({socket}){
                       borderRadius="md"
                     >
                       <button
-                        // className={`ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
                         className={`fa-solid fa-wand-sparkles ai-assist-btn ${isAIModalOpen ? 'active' : ''}`}
                         onClick={onAIModalOpen}
                         disabled={currentChatUser?.deleted}
                         aria-label="AI Message Assistant"
                       >
                         <i className="fa-solid fa-wand-sparkles" style={{ color: '#6e40ff' }}></i>
-                        {/* <i className="fas fa-sparkle fa-pulse"></i> */}
                       </button>
-                     </Tooltip>
+                     </Tooltip> */}
+
+                      <button
+                        className="fa-solid fa-wand-sparkles ai-assist-btn"
+                        onClick={onAIModalOpen}
+                        disabled={currentChatUser?.deleted}
+                        aria-label="AI Message Assistant"
+                      ></button>
+
 
                      <button
                         className="fa fa-edit format-message-btn"
