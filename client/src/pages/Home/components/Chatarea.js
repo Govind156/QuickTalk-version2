@@ -428,8 +428,8 @@ function Chatarea({socket}){
           dispatch(updateScheduledMessage({
             ...updatedMessage,
             // Ensure these flags are always set correctly
-            scheduled: true,
-            sent: false
+            scheduled: false,
+            sent: true
           }));
         }
       };
