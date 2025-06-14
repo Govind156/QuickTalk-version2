@@ -134,7 +134,7 @@ const AIMessageModal = ({ isOpen, onClose, onSend }) => {
 
           {aiResponse && (
             <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
-              <Text mb={2}>{aiResponse}</Text>
+              <Text mb={2} whiteSpace="pre-wrap">{aiResponse}</Text>
               <Box display="flex" justifyContent="flex-end" mt={2}>
                 <IconButton
                   icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
