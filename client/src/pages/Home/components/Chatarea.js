@@ -18,6 +18,11 @@ import ScheduledMessagesList from './ScheduledMessagesList';
 import { useDisclosure } from '@chakra-ui/react';
 import AIMessageModal from './AIMessageModal'
 import { Tooltip } from '@chakra-ui/react'
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
+
+
 
 function Chatarea({socket}){
     const {currentChatUser,selectedchat,user,Allchats,scheduledMessages,chatDrafts}=useSelector(state=>state.userReducer)
@@ -49,6 +54,8 @@ function Chatarea({socket}){
     } = useDisclosure(); 
     
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+     const mdParser = new MarkdownIt();
+   
    
    
   
@@ -284,6 +291,23 @@ function Chatarea({socket}){
         sender: user._id
       });
     };
+
+    const handleEditorChange = ({ text }) => {
+      setMessage(text);
+
+      // Save draft
+      if (selectedchat?._id) {
+        saveDraftDebounced(selectedchat._id, text);
+      }
+
+      // Typing indicator
+      socket.emit('user-typing', {
+        chatId: selectedchat._id,
+        members: selectedchat.members.map(m => m._id),
+        sender: user._id
+      });
+    };
+
   
 
    
@@ -610,7 +634,7 @@ function Chatarea({socket}){
 
                  {!showScheduledList && <div className="send-message-div">
                      <div className={currentChatUser?.deleted ? "disabled-chat-area" : ""}> 
-                      <textarea
+                      {/* <textarea
                           type="text"
                           className="send-message-input"
                           placeholder="Type a message"
@@ -618,6 +642,14 @@ function Chatarea({socket}){
                           disabled={currentChatUser?.deleted}
                           onChange={handleMessageChange}
                          rows='1' 
+                      /> */}
+                      <MdEditor
+                        value={message}
+                        className="send-message-input"
+                        style={{ height: '200px' }}
+                        renderHTML={(text) => mdParser.render(text)}
+                        onChange={handleEditorChange}
+                        readOnly={currentChatUser?.deleted}
                       />
                       <label htmlFor="file">
                           <i className="fa fa-picture-o send-image-btn"></i>
