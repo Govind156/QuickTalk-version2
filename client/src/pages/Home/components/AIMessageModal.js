@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setAIResponse, setAILoading, setAIError, clearAIResponse } from '../../../redux/usersSlice';
 import axios from 'axios';
 import {generateAImessage} from '../../../apiCalls/message'
+import ReactMarkdown from 'react-markdown';
 
 const TONE_OPTIONS = [
   { value: 'default', label: 'Default' },
@@ -134,7 +135,8 @@ const AIMessageModal = ({ isOpen, onClose, onSend }) => {
 
           {aiResponse && (
             <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
-              <Text mb={2} whiteSpace="pre-wrap">{aiResponse}</Text>
+              {/* <Text mb={2} whiteSpace="pre-wrap">{aiResponse}</Text> */}
+               <ReactMarkdown>{aiResponse}</ReactMarkdown>
               <Box display="flex" justifyContent="flex-end" mt={2}>
                 <IconButton
                   icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
