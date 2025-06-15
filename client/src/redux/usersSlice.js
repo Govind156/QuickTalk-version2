@@ -67,39 +67,69 @@ const userSlice=createSlice({
             msg => msg && msg._id !== action.payload
           );
         },
+        // updateScheduledMessage: (state, action) => {
+        //   if (!Array.isArray(state.scheduledMessages)) {
+        //     state.scheduledMessages = [];
+        //   }
+          
+        //   const existingIndex = state.scheduledMessages.findIndex(
+        //     msg => msg._id === action.payload._id
+        //   );
+          
+        //  if (existingIndex >= 0) {
+        //   state.scheduledMessages[existingIndex] = {
+        //     ...state.scheduledMessages[existingIndex],
+        //     ...action.payload,
+        //     // Explicitly override values if provided in payload
+        //     scheduled: action.payload.hasOwnProperty('scheduled')
+        //       ? action.payload.scheduled
+        //       : state.scheduledMessages[existingIndex].scheduled,
+        //     sent: action.payload.hasOwnProperty('sent')
+        //       ? action.payload.sent
+        //       : state.scheduledMessages[existingIndex].sent,
+        //     scheduledFor: action.payload.hasOwnProperty('scheduledFor')
+        //       ? action.payload.scheduledFor
+        //       : state.scheduledMessages[existingIndex].scheduledFor
+        //   };
+        // } else {
+        //   // For new messages
+        //   state.scheduledMessages.push({
+        //     ...action.payload,
+        //     scheduled: action.payload.scheduled ?? true,
+        //     sent: action.payload.sent ?? false,
+        //     scheduledFor: action.payload.scheduledFor ?? null
+        //   });
+        // }
+        // },
         updateScheduledMessage: (state, action) => {
           if (!Array.isArray(state.scheduledMessages)) {
             state.scheduledMessages = [];
           }
-          
-          const existingIndex = state.scheduledMessages.findIndex(
-            msg => msg._id === action.payload._id
-          );
-          
-         if (existingIndex >= 0) {
-          state.scheduledMessages[existingIndex] = {
-            ...state.scheduledMessages[existingIndex],
+
+          const updatedMessage = {
             ...action.payload,
-            // Explicitly override values if provided in payload
             scheduled: action.payload.hasOwnProperty('scheduled')
               ? action.payload.scheduled
-              : state.scheduledMessages[existingIndex].scheduled,
+              : true,
             sent: action.payload.hasOwnProperty('sent')
               ? action.payload.sent
-              : state.scheduledMessages[existingIndex].sent,
+              : false,
             scheduledFor: action.payload.hasOwnProperty('scheduledFor')
               ? action.payload.scheduledFor
-              : state.scheduledMessages[existingIndex].scheduledFor
+              : null
           };
-        } else {
-          // For new messages
-          state.scheduledMessages.push({
-            ...action.payload,
-            scheduled: action.payload.scheduled ?? true,
-            sent: action.payload.sent ?? false,
-            scheduledFor: action.payload.scheduledFor ?? null
-          });
-        }
+
+          const exists = state.scheduledMessages.some(
+            msg => msg._id === action.payload._id
+          );
+
+          state.scheduledMessages = exists
+            ? state.scheduledMessages.map(msg =>
+                msg._id === action.payload._id
+                  ? { ...msg, ...updatedMessage }
+                  : msg
+              )
+            : [...state.scheduledMessages, updatedMessage];
         },
         setAddNewUser: (state, action) => {
           // Check if user already exists in Alluser array
