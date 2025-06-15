@@ -415,32 +415,7 @@ function Chatarea({socket}){
     }, [selectedchat, user?._id, dispatch]);
 
     // Update your socket listener
-    useEffect(() => {
-      const handleScheduledMessageUpdate = (updatedMessage) => {
-        // Verify the message structure
-        if (!updatedMessage._id || !updatedMessage.chatId) {
-          console.error('Invalid message structure in update');
-          return;
-        }
-    
-        // Only process if it's for the current chat
-        if (selectedchat?._id === updatedMessage.chatId) {
-          dispatch(updateScheduledMessage({
-            ...updatedMessage,
-            // Ensure these flags are always set correctly
-            scheduled: false,
-            sent: true,
-            scheduledFor:null
-          }));
-        }
-      };
-    
-      socket.on('scheduled-message-updated', handleScheduledMessageUpdate);
-    
-      return () => {
-        socket.off('scheduled-message-updated', handleScheduledMessageUpdate);
-      };
-    }, [socket, dispatch, selectedchat]);
+    //----
 
     useEffect(() => {
       const handleScheduledMessageSent = async(data) => {
@@ -565,6 +540,7 @@ function Chatarea({socket}){
                         []}
                       onCancel={handleCancelScheduled}
                       onEdit={handleEditScheduled}
+                      socket={socket}
                     />
                   </div>
                 ): (

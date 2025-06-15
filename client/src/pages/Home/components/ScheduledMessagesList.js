@@ -37,9 +37,10 @@ import {removeScheduledMessage,updateScheduledMessage,addScheduledMessage,setSch
 import { cancelScheduledMessage, editScheduledMessage ,getScheduledMessages} from '../../../apiCalls/message';
 
 
-const ScheduledMessagesList = ({onCancel,onEdit}) => {
+const ScheduledMessagesList = ({socket,onCancel,onEdit}) => {
   
-  const {user}=useSelector(state=>state.userReducer)
+  const {user,selectedchat}=useSelector(state=>state.userReducer)
+
   const dispatch = useDispatch();
   const toast = useToast();
   // State for edit modal
@@ -153,6 +154,32 @@ const ScheduledMessagesList = ({onCancel,onEdit}) => {
     return date.toLocaleString();
   };
   
+  useEffect(() => {
+        const handleScheduledMessageUpdate = (updatedMessage) => {
+          // Verify the message structure
+          if (!updatedMessage._id || !updatedMessage.chatId) {
+            console.error('Invalid message structure in update');
+            return;
+          }
+      
+          // Only process if it's for the current chat
+          if (selectedchat?._id === updatedMessage.chatId) {
+            dispatch(updateScheduledMessage({
+              ...updatedMessage,
+              // Ensure these flags are always set correctly
+              scheduled: false,
+              sent: true,
+              scheduledFor:null
+            }));
+          }
+        };
+      
+        socket.on('scheduled-message-updated', handleScheduledMessageUpdate);
+      
+        return () => {
+          socket.off('scheduled-message-updated', handleScheduledMessageUpdate);
+        };
+  }, [socket, dispatch, selectedchat]);
 
   return (
     <Box p={3} height="100%" display="flex" flexDirection="column">
