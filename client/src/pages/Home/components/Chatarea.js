@@ -429,7 +429,8 @@ function Chatarea({socket}){
             ...updatedMessage,
             // Ensure these flags are always set correctly
             scheduled: false,
-            sent: true
+            sent: true,
+            scheduledFor:null
           }));
         }
       };
@@ -451,14 +452,12 @@ function Chatarea({socket}){
                 sent: true,
                 scheduled: false,
                 scheduledFor:null,
-                text:data.text
+                text:data._id.text
               });
 
               if (response.success) {
               dispatch(updateScheduledMessage(response.data));  
-              } 
-
-
+              }
             }
         //try by me when handle by server
         //  dispatch(updateScheduledMessage({...data,sent:true,
