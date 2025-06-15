@@ -179,7 +179,7 @@ const ScheduledMessagesList = ({socket,onCancel,onEdit}) => {
         return () => {
           socket.off('scheduled-message-updated', handleScheduledMessageUpdate);
         };
-  }, [socket, dispatch, selectedchat]);
+  }, [socket, dispatch, selectedchat,scheduledMessages]);
 
   return (
     <Box p={3} height="100%" display="flex" flexDirection="column">
@@ -209,7 +209,7 @@ const ScheduledMessagesList = ({socket,onCancel,onEdit}) => {
                 {msg.sent ? "Sent" : "Pending"}
               </Badge>
               <Text fontSize="sm" color="gray.500">
-                {formatScheduledTime(msg.scheduledFor)}
+                {msg.scheduledFor ? formatScheduledTime(msg.scheduledFor) : "Sent"}
               </Text>
             </Flex>
 
