@@ -37,7 +37,7 @@ import {removeScheduledMessage,updateScheduledMessage,addScheduledMessage,setSch
 import { cancelScheduledMessage, editScheduledMessage ,getScheduledMessages} from '../../../apiCalls/message';
 
 
-const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
+const ScheduledMessagesList = ({onCancel,onEdit}) => {
   
   const {user}=useSelector(state=>state.userReducer)
   const dispatch = useDispatch();
@@ -49,6 +49,8 @@ const ScheduledMessagesList = ({ scheduledMessages,onCancel,onEdit}) => {
   const [editedDateTime, setEditedDateTime] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const scheduledMessages = useSelector(state => state.userReducer.scheduledMessages);
+
  
   const openEditModal = (message) => {
     setEditingMessage(message);

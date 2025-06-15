@@ -459,10 +459,6 @@ function Chatarea({socket}){
               dispatch(updateScheduledMessage(response.data));  
               }
             }
-        //try by me when handle by server
-        //  dispatch(updateScheduledMessage({...data,sent:true,
-        //         scheduled: false,
-        //         scheduledFor:null,}))
 
       };
     
