@@ -424,10 +424,10 @@ function Chatarea({socket}){
         //try by me -update server status
             if (data._id && typeof data._id === 'string' && !data._id.startsWith('temp-')) {
               const response=await editScheduledMessage(data._id, {
-                sent: true,
+                ...data,
                 scheduled: false,
-                scheduledFor:null,
-                text:data._id.text
+                sent: true,
+                scheduledFor: null
               });
 
               if (response.success) {

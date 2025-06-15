@@ -52,8 +52,7 @@ const initializeMessageScheduler = (io) => {
   
           // 2. For removing from scheduled list
           io.to(message.chatId._id.toString()).emit('scheduled-message-sent', {
-            _id: message._id.toString(),
-            chatId: message.chatId._id.toString()
+            ...messageToEmit
           });
 
 

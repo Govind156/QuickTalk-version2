@@ -196,7 +196,7 @@ const ScheduledMessagesList = ({socket,onCancel,onEdit}) => {
       <Box flex="1" overflowY="auto">
         {scheduledMessages.map((msg) => (
           <Box 
-            key={msg._id} 
+            key={msg._id +msg.sent} 
             borderWidth="1px" 
             borderRadius="md" 
             p={3}
