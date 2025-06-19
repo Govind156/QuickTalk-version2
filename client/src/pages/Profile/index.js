@@ -26,7 +26,7 @@ function Profile({ socket }) {
                     toast.success(response.message);
                     // Logout the user after deletion
                     localStorage.removeItem('token');
-                    window.location.href = '/login';
+                    window.location.href = '/';
                 }
             } catch (error) {
                 dispatch(hideLoader());

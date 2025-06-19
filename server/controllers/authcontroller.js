@@ -82,7 +82,6 @@ router.post('/signup',async(req,res)=>{
         req.body.verificationcode=verificationcode;
         const newuser=new usermodel(req.body)
        
-
         await newuser.save();
          userEmailCache.set(email, true); // Update cache
       
@@ -181,6 +180,7 @@ router.post('/verifysignup',async(req,res)=>{
         user.isVerified=true;
         user.verificationcode=undefined
         await user.save()
+        const name = `${user.firstName} ${user.LastName}`;
         WelcomeEmail(user.email,name)
         return res.send({
             success:true,
