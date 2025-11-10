@@ -407,7 +407,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
   try {
-    const genAI = new GoogleGenerativeAI(process.env.GoogleGenAI_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GoogleGenAI_API_KEY,{apiVersion: "v1"});
 
     const { prompt } = req.body;
 
