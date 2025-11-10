@@ -433,6 +433,7 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
       message: "successful"
     });
   } catch (error) {
+    console.error("Gemini ERROR DETAILS:", error);
     res.status(500).send({
       success: false,
       message: "Failed to generate AI message",
