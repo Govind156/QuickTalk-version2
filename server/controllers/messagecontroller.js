@@ -437,7 +437,8 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Failed to generate AI message",
-      error: error.message
+      error: error.message,
+      details: error.response?.data || null
     });
   }
 });
