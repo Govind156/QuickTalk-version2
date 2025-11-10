@@ -60,8 +60,8 @@ router.post('/signup',async(req,res)=>{
         req.body.password=hashedpassword
         const verificationcode=Math.floor(100000+Math.random() *900000).toString()
 
-        console.log( `bounce key-->${ZEROBOUNCE_API_KEY}`)
-        console.log(`email-->${email}`)
+        // console.log( `bounce key-->${ZEROBOUNCE_API_KEY}`)
+        // console.log(`email-->${email}`)
 
         
         

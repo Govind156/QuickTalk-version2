@@ -5,10 +5,9 @@ const transporter=nodemailer.createTransport({
     port:587,
     secure:false,
     auth:{
-       user:"govindmadaan99@gmail.com",
-       pass:"gncnhtvujpbcudnq"
+       user:process.env.user,
+       pass:process.env.pass
     }
 })
-
 
 module.exports={transporter}
