@@ -3,7 +3,7 @@ const {transporter}=require("./sendtransporter")
 const Sendverificationcode=async(email,verificationcode)=>{
     try{
         const response=await transporter.sendMail({
-            from:`Govind Madaan😎 <govindmadaan99@gmail.com>`,
+            from:process.env.EMAIL_FROM,
             to:email,
             subject:"verify your code",
             text:"verify your code",
@@ -19,7 +19,7 @@ const Sendverificationcode=async(email,verificationcode)=>{
 const WelcomeEmail=async(email,name)=>{
     try{
         const response=await transporter.sendMail({
-            from:`Govind Madaan😎 <govindmadaan99@gmail.com>`,
+            from:process.env.EMAIL_FROM,
             to:email,
             subject:"Welcome to QuickTalk – Let’s Get Chatting! 🚀",
             text:"Welcome",
