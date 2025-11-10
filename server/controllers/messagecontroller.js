@@ -407,7 +407,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
   try {
-    const genAI = new GoogleGenerativeAI(process.env.GoogleGenAI_API_KEY,{apiVersion: "v1"});
+    const genAI = new GoogleGenerativeAI(process.env.GoogleGenAI_API_KEY,);
 
     const { prompt } = req.body;
 
@@ -415,7 +415,7 @@ router.post('/generate-ai-message', Authmiddleware, async (req, res) => {
      return res.status(400).send({ success: false, message: "Invalid prompt" });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); 
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
