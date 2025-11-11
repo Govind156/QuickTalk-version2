@@ -10,7 +10,7 @@ const axios = require("axios");
 
 // Cache for frequently accessed user data (email checks)
 //but for deployment need to use redis
-const userEmailCache = new Map();
+// const userEmailCache = new Map();
 
 router.post('/signup',async(req,res)=>{
     try{
@@ -23,12 +23,12 @@ router.post('/signup',async(req,res)=>{
         }
 
         // 1. First check in-memory cache
-        if (userEmailCache.has(email)) {
-            return res.status(409).send({
-                message: "User already exists",
-                success: false
-            });
-        }
+        // if (userEmailCache.has(email)) {
+        //     return res.status(409).send({
+        //         message: "User already exists",
+        //         success: false
+        //     });
+        // }
 
         //1. find user
         //  const user =await usermodel.findOne({email:req.body.email})
@@ -82,7 +82,7 @@ router.post('/signup',async(req,res)=>{
         const newuser=new usermodel(req.body)
        
         await newuser.save();
-         userEmailCache.set(email, true); // Update cache
+        //  userEmailCache.set(email, true); // Update cache
       
         // Emit new user event to all connected clients
         req.io.emit('new-user-added', newuser);
