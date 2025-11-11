@@ -14,6 +14,7 @@ const Sendverificationcode=async(email,verificationcode)=>{
 
     }
     catch(error){
+        console.log(error)
         return { success: false, message: error.message };
     }
 }

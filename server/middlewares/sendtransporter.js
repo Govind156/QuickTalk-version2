@@ -1,3 +1,4 @@
+require('dotenv').config({path:'../config.env'})
 const nodemailer=require('nodemailer')
 
 const transporter=nodemailer.createTransport({
