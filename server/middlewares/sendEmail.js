@@ -1,9 +1,13 @@
 require('dotenv').config({path:'../config.env'})
 const { Welcome_Email_Template ,Verification_Email_Template} = require("./EmailTemplate");
-const {transporter}=require("./sendtransporter")
+// const {transporter}=require("./sendtransporter")
+const {Resend} = require('resend')
+const resend=new Resend(process.env.RESEND_API_KEY)
+
+
 const Sendverificationcode=async(email,verificationcode)=>{
     try{
-        const response=await transporter.sendMail({
+        const response=await resend.emails.send({
             from:process.env.EMAIL_FROM,
             to:email,
             subject:"verify your code",
@@ -20,7 +24,7 @@ const Sendverificationcode=async(email,verificationcode)=>{
 }
 const WelcomeEmail=async(email,name)=>{
     try{
-        const response=await transporter.sendMail({
+        const response=await resend.emails.send({
             from:process.env.EMAIL_FROM,
             to:email,
             subject:"Welcome to QuickTalk – Let’s Get Chatting! 🚀",
@@ -32,4 +36,7 @@ const WelcomeEmail=async(email,name)=>{
         console.log(error);
     }
 }
+
+
+
 module.exports={Sendverificationcode,WelcomeEmail}
