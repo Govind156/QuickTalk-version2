@@ -8,7 +8,7 @@ const resend=new Resend(process.env.RESEND_API_KEY)
 const Sendverificationcode=async(email,verificationcode)=>{
     try{
         const response=await resend.emails.send({
-            from:process.env.EMAIL_FROM,
+            from:`QuickTalk <QuickTalk@resend.dev>`,
             to:email,
             subject:"verify your code",
             text:"verify your code",
@@ -25,7 +25,7 @@ const Sendverificationcode=async(email,verificationcode)=>{
 const WelcomeEmail=async(email,name)=>{
     try{
         const response=await resend.emails.send({
-            from:process.env.EMAIL_FROM,
+            from:`QuickTalk <QuickTalk@resend.dev>`,
             to:email,
             subject:"Welcome to QuickTalk – Let’s Get Chatting! 🚀",
             text:"Welcome",
