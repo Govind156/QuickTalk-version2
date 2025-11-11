@@ -1,3 +1,4 @@
+require('dotenv').config({path:'../config.env'})
 const { Welcome_Email_Template ,Verification_Email_Template} = require("./EmailTemplate");
 const {transporter}=require("./sendtransporter")
 const Sendverificationcode=async(email,verificationcode)=>{

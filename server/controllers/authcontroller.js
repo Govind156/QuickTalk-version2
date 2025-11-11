@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './config.env' });
+require('dotenv').config({ path: '../config.env' });
 const router=require('express').Router()
 const bcryptjs=require('bcryptjs')
 const usermodel=require('../models/usermodel')
@@ -6,7 +6,6 @@ const jwt=require('jsonwebtoken')
 const { SendEmail } = require('../middlewares/sendtransporter')
 const { Sendverificationcode,WelcomeEmail} = require('../middlewares/sendEmail')
 const ZEROBOUNCE_API_KEY=process.env.ZEROBOUNCE_API_KEY;
-
 const axios = require("axios");
 
 // Cache for frequently accessed user data (email checks)
