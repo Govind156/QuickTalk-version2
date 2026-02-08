@@ -21,6 +21,11 @@ const Sendverificationcode=async(email,verificationcode)=>{
             text:"verify your code",
             html:Verification_Email_Template.replace("{verificationCode}",verificationcode),
         })
+        console.log("SMTP RESPONSE:", {
+        messageId: response.messageId,
+        accepted: response.accepted,
+        rejected: response.rejected
+        });
     return { success: true };
 
     }
