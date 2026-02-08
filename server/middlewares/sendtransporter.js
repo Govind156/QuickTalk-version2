@@ -3,7 +3,7 @@ const nodemailer=require('nodemailer')
 
 const transporter=nodemailer.createTransport({
     host:"smtp.gmail.com",
-    port:465,
+    port:587,
     secure:true,
     auth:{
        user:process.env.USER,
@@ -13,3 +13,4 @@ const transporter=nodemailer.createTransport({
 
 module.exports={transporter}
 //before port:587
+//before port:465
