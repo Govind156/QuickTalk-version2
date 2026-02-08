@@ -62,7 +62,14 @@ const userschema=new mongoose.Schema({
 })
 
 userschema.index({ email: 1, isVerified: 1 });
-userschema.index({ createdAt: 1 });
+
+userschema.index(
+    { createdAt: 1 },
+    {
+        expireAfterSeconds: 7 * 24 * 60 * 60, // 7 days
+        partialFilterExpression: { isVerified: false } // Only applies to unverified users
+    }
+);
 
 const usermodel=mongoose.model('users',userschema)
 module.exports=usermodel

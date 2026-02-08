@@ -1,8 +1,8 @@
 require('dotenv').config({path:'../config.env'})
 const { Welcome_Email_Template ,Verification_Email_Template} = require("./EmailTemplate");
 // const {transporter}=require("./sendtransporter")
-const {Resend} = require('resend')
-const resend=new Resend(process.env.RESEND_API_KEY)
+// const {Resend} = require('resend')
+// const resend=new Resend(process.env.RESEND_API_KEY)
 const {brevoApi}= require('../config/brevo.js')
 
 

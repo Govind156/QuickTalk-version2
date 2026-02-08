@@ -11,7 +11,7 @@ const io=require('socket.io')(server,{cors:{
 }})
 // Import the message scheduler
 const { initializeMessageScheduler } = require('./services/messagescheduler');
-
+// require('./cron/cleanupUnverifiedUsers')
 
 //middleware
 app.use(cors())
