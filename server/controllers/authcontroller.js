@@ -4,7 +4,7 @@ const bcryptjs=require('bcryptjs')
 const usermodel=require('../models/usermodel')
 const jwt=require('jsonwebtoken')
 const { SendEmail } = require('../middlewares/sendtransporter')
-const { Sendverificationcode,WelcomeEmail} = require('../middlewares/sendEmail')
+const { Sendverificationcode,WelcomeEmail,Resendverificationcode} = require('../middlewares/sendEmail')
 const ZEROBOUNCE_API_KEY=process.env.ZEROBOUNCE_API_KEY;
 const axios = require("axios");
 
@@ -113,7 +113,12 @@ router.post('/login',async (req,res)=>{
             .select('+password +isVerified')
             .lean();
 
-        
+        if (user.isVerified === false) {
+            return res.send({
+                message: "Account not verified",
+                success: false
+            });
+        }
 
         if(!user){
             return res.send({
@@ -130,12 +135,7 @@ router.post('/login',async (req,res)=>{
             })
         }
       
-        if (!user.isVerified) {
-            return res.send({
-                message: "Account not verified",
-                success: false
-            });
-        }
+        
 
        
         //3.if user exist and password is correct then assign token
@@ -184,6 +184,41 @@ router.post('/verifysignup',async(req,res)=>{
         return res.send({
             success:true,
             message:"email verification successfully",
+            data:user
+        })
+    }
+    catch(error){
+        return res.send({
+            message:error.message,
+            success:false,
+        })
+    }
+})
+router.post('/resend-verification',async(req,res)=>{
+    try{
+        const {email}=req.body
+        const user=await usermodel.findOne({
+            email:email
+        })
+        if(!user){
+            return res.status(404).send({
+                success:false,
+                message:"User not found"
+            })
+        }
+        if(user.isVerified){
+            return res.status(400).send({
+                success:true,
+                message:"user already verified"
+            })
+        }
+        const newverificationcode=Math.floor(100000+Math.random() *900000).toString()
+        user.verificationcode=newverificationcode
+        await user.save()
+        await Resendverificationcode(email,newverificationcode);
+        return res.send({
+            success:true,
+            message:"Resend  Code sent successfully",
             data:user
         })
     }

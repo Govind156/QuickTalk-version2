@@ -1,5 +1,5 @@
 require('dotenv').config({path:'../config.env'})
-const { Welcome_Email_Template ,Verification_Email_Template} = require("./EmailTemplate");
+const { Welcome_Email_Template ,Verification_Email_Template,Resend_Verification_Email_Template} = require("./EmailTemplate");
 // const {transporter}=require("./sendtransporter")
 // const {Resend} = require('resend')
 // const resend=new Resend(process.env.RESEND_API_KEY)
@@ -119,4 +119,31 @@ const WelcomeEmail = async (email, name) => {
   }
 };
 
-module.exports={Sendverificationcode,WelcomeEmail}
+const Resendverificationcode=async(email,code)=>{
+    try {
+    await brevoApi.sendTransacEmail({
+      sender: {
+        name: "Govind Madaan",
+        email: "govindmadaan999@gmail.com",
+      },
+      to: [{ email }],
+      subject: "Verify your account",
+      htmlContent: Resend_Verification_Email_Template.replace("{verificationCode}",code),
+      });
+
+    return { success: true };
+  } catch (error) {
+    console.error("BREVO RESEND EMAIL ERROR:", {
+      message: error?.message,
+      code: error?.code,
+      response: error?.response?.text,
+    });
+
+    return {
+      success: false,
+      message: "Failed to send Code",
+    };
+  }
+}
+
+module.exports={Sendverificationcode,WelcomeEmail,Resendverificationcode}

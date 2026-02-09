@@ -171,4 +171,100 @@ const Welcome_Email_Template = `
   </html>
 `;
 
-module.exports={Verification_Email_Template,Welcome_Email_Template}
+const Resend_Verification_Email_Template = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resend Verification Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        .header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 25px;
+            color: #333;
+            line-height: 1.8;
+        }
+        .verification-code {
+            display: block;
+            margin: 20px 0;
+            font-size: 22px;
+            color: #2196F3;
+            background: #e3f2fd;
+            border: 1px dashed #2196F3;
+            padding: 12px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .footer {
+            background-color: #f4f4f4;
+            padding: 15px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            border-top: 1px solid #ddd;
+        }
+        p {
+            margin: 0 0 15px;
+        }
+        .note {
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Verification Code</div>
+        <div class="content">
+            <p>Hello,</p>
+
+            <p>
+              You requested a new verification code to complete your email
+              verification. Please use the code below:
+            </p>
+
+            <span class="verification-code">{verificationCode}</span>
+
+            <p class="note">
+              This code will expire soon. If you did not request this email,
+              you can safely ignore it.
+            </p>
+
+            <p>
+              If you continue to face issues, feel free to contact our support team.
+            </p>
+        </div>
+        <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+`;
+
+module.exports={Verification_Email_Template,Welcome_Email_Template,Resend_Verification_Email_Template}

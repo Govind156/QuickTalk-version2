@@ -29,3 +29,13 @@ export const logInUser=async(user)=>{
         return error;
     }
 }
+export const Resendverifycode=async(email)=>{
+    try{
+        const response =await axiosInstance.post(url+'api/auth/resend-verification',email)
+        return response.data
+    }
+    catch(error){
+        return error;
+
+    }
+}

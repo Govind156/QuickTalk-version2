@@ -128,6 +128,42 @@ body{
   width: 400px;  /* Added: Match card width */
 }
 
+.resendButton{
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #58d68d;
+  color:#333333;
+  border:2px solid #333333;
+  border-radius: 10px;
+
+}
+
+.resend-box {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-12px) scale(0.98);
+  transition:
+    max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.resend-box.show {
+  max-height: 180px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.resend-box input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resend-box input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+  outline: none;
+}
 
 /********************************************************************
 ***************************CSS FOR LOADIER**************************
